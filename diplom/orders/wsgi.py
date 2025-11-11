@@ -1,5 +1,5 @@
 """
-WSGI config for orders project.
+WSGI config for diplom project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

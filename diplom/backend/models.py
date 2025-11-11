@@ -116,7 +116,7 @@ class Order(models.Model):
 
     user = models.ForeignKey(
         User,
-        related_name='orders',
+        related_name='diplom',
         on_delete=models.CASCADE
     )  # Пользователь, оформивший заказ
     dt = models.DateTimeField(auto_now_add=True)  # Дата и время создания заказа
