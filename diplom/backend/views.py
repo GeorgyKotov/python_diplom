@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
-from django.core.mail import send_mail
+from backend.tasks import send_order_confirmation_email, send_registration_confirmation_email
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
@@ -228,13 +228,7 @@ class RegisterAPIView(APIView):
         link = f"{request.scheme}://{request.get_host()}/confirm?uid={uid}&token={token}"
 
         # Отправляем письмо (в разработке уходит в консоль)
-        send_mail(
-            subject="Подтверждение регистрации",
-            message=f"Для активации аккаунта перейдите по ссылке: {link}",
-            from_email=None,
-            recipient_list=[data['email']],
-            fail_silently=True
-        )
+        send_registration_confirmation_email.delay(data['email'], link)
 
         return Response({"status": "ok"}, status=status.HTTP_201_CREATED)
 
@@ -508,13 +502,7 @@ class OrderCreateAPIView(APIView):
             del request.session['cart']
 
         # Отправляем пользователю письмо с подтверждением (уходит в консоль в dev)
-        send_mail(
-            subject=f"Заказ №{order.pk} создан",
-            message=f"Ваш заказ {order.pk} успешно оформлен.",
-            from_email=None,
-            recipient_list=[request.user.email],
-            fail_silently=True
-        )
+        send_order_confirmation_email.delay(order.pk, request.user.email)
 
         return Response({"status": "ok", "order_id": order.pk}, status=status.HTTP_201_CREATED)
 
