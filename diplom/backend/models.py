@@ -143,6 +143,7 @@ class OrderItem(models.Model):
         on_delete=models.CASCADE
     )  # Ссылка на товар у конкретного магазина
     quantity = models.PositiveIntegerField(default=1)  # Количество товара
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Цена на момент заказа')  # Цена на момент заказа
 
     class Meta:
         unique_together = ('order', 'product_info')  # Нельзя добавить один и тот же товар дважды
