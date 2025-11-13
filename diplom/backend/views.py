@@ -16,6 +16,7 @@ from .models import ProductInfo, Contact, Order, OrderItem
 from .serializers import RegisterSerializer, LoginSerializer, ProductInfoSerializer
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 # Получаем модель пользователя (стандартная или кастомная, если указана в settings)
 User = get_user_model()
@@ -514,6 +515,7 @@ class OrdersListAPIView(APIView):
     Возвращает список заказов пользователя с товарами внутри.
     """
     permission_classes = (permissions.IsAuthenticated,)
+    throttle_classes = [AnonRateThrottle, UserRateThrottle]
 
     def get(self, request):
         orders = Order.objects.filter(user=request.user).order_by('-pk')
