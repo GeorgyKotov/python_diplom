@@ -124,12 +124,12 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.AnonRateThrottle',
         'rest_framework.throttling.UserRateThrottle',
+        'rest_framework.throttling.AnonRateThrottle',
     ],
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '100/hour',   # 100 запросов в час для анонимных
-        'user': '1000/hour',  # 1000 запросов в час для авторизованных
+        'user': '100/hour',
+        'anon': '10/hour',
     },
 }
 
