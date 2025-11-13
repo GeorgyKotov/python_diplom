@@ -12,6 +12,7 @@ from backend.views import (
     OrderCreateAPIView,
     OrdersListAPIView,
 )
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 urlpatterns = [
     # Стандартная админка Django (для проверки данных)
@@ -50,4 +51,9 @@ urlpatterns = [
     path('orders/create/', OrderCreateAPIView.as_view(), name='order_create'),
     # GET — список заказов пользователя
     path('orders/', OrdersListAPIView.as_view(), name='orders_list'),
+
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),  # выгрузка schema.json
+    path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+    path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
