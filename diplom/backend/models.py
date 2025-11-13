@@ -118,7 +118,15 @@ class Order(models.Model):
         User,
         related_name='diplom',
         on_delete=models.CASCADE
-    )  # Пользователь, оформивший заказ
+    )
+    contact = models.ForeignKey(  # Контакт создателя заказа
+        'Contact',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='orders'
+    )
+    # Пользователь, оформивший заказ
     dt = models.DateTimeField(auto_now_add=True)  # Дата и время создания заказа
     status = models.CharField(
         max_length=20,
