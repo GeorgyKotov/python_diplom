@@ -1,4 +1,4 @@
-![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/GeorgyKotov/python_diplom/main/diplom/.github/badges/coverage-badge.json)
+![Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/GeorgyKotov/python_diplom/main/.github/badges/coverage-badge.json)
 
 # Сервис заказа товаров для розничных сетей
 
