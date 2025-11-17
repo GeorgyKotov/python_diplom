@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from backend.views import (
     RegisterAPIView,
     ConfirmAPIView,
@@ -14,7 +14,6 @@ from backend.views import (
     home,
 )
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
-from django.urls import path, include
 
 urlpatterns = [
     # Стандартная админка Django (для проверки данных)

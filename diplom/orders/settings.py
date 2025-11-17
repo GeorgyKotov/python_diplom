@@ -19,6 +19,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,6 +112,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -179,5 +184,48 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
 ]
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Kotov Shop Admin",
+    "site_header": "Админ-панель Kotov Shop",
+    "site_brand": "Kotov Shop",
+    "welcome_sign": "Добро пожаловать в панель управления",
+    "copyright": "© 2025 Kotov Technologies",
+    "search_model": ["backend.Product", "backend.Category"],
+
+    "topmenu_links": [
+        {"name": "Главная", "url": "admin:index", "icon": "fas fa-home"},
+        {"name": "GitHub проекта", "url": "https://github.com/GeorgyKotov/python_diplom", "new_window": True},
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": False,
+
+    "icons": {
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "backend.Category": "fas fa-folder",
+        "backend.Product": "fas fa-box",
+    },
+
+    "custom_css": None,
+    "custom_js": None,
+    "related_modal_active": True,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "cosmo",
+    "navbar_small_text": False,
+    "footer_small_text": True,
+    "body_small_text": False,
+    "brand_small_text": False,
+
+    "navbar": "navbar-dark bg-primary",
+    "accent": "accent-primary",
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": True,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+}
 
 
