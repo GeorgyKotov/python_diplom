@@ -17,6 +17,8 @@ from .serializers import RegisterSerializer, LoginSerializer, ProductInfoSeriali
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Получаем модель пользователя (стандартная или кастомная, если указана в settings)
 User = get_user_model()
@@ -538,3 +540,8 @@ class OrdersListAPIView(APIView):
             })
 
         return Response({"status": "ok", "diplom": result})
+
+
+@login_required
+def home(request):
+    return HttpResponse(f"Авторизация успешна, {request.user.username}")

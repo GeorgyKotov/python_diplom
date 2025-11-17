@@ -11,8 +11,10 @@ from backend.views import (
     ContactDetailAPIView,
     OrderCreateAPIView,
     OrdersListAPIView,
+    home,
 )
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
+from django.urls import path, include
 
 urlpatterns = [
     # Стандартная админка Django (для проверки данных)
@@ -57,4 +59,8 @@ urlpatterns = [
     path("docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
     path("redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
     path('schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+
+    # Авторизация через социальные сети
+    path('auth/', include('social_django.urls', namespace='social')),
+    path('', home, name='home'),
 ]

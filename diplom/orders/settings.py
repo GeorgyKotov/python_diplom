@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-+_bjhw$d+ezo2!s14ynbv#)1v)0j#qnyy-dh)y1y(qb3=3r2-0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'drf_spectacular',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -39,6 +40,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'orders.urls'
@@ -53,6 +55,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -148,5 +152,32 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.github.GithubOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "GOOGLE_CLIENT_ID"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "GOOGLE_CLIENT_SECRET"
+
+SOCIAL_AUTH_GITHUB_KEY = "GITHUB_CLIENT_ID"
+SOCIAL_AUTH_GITHUB_SECRET = "GITHUB_CLIENT_SECRET"
+
+LOGIN_URL = "login/"
+LOGIN_REDIRECT_URL = "home/"
+LOGOUT_REDIRECT_URL = "login/"
+
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/login-error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/logged-in/'
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL = '/profile-setup/'
+SOCIAL_AUTH_NEW_ASSOCIATION_REDIRECT_URL = '/settings/'
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
 
 
