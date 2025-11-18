@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'backend',
     'rest_framework',
     'corsheaders',
+    'easy_thumbnails',
     'drf_spectacular',
     'social_django',
 ]
@@ -227,5 +228,20 @@ JAZZMIN_UI_TWEAKS = {
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": True,
 }
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar_small': {'size': (50, 50), 'crop': True},
+        'avatar_medium': {'size': (200, 200), 'crop': True},
+        'product_small': {'size': (150, 150), 'crop': True},
+        'product_medium': {'size': (600, 600), 'crop': True},
+    }
+}
+
+THUMBNAIL_DEFAULT_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 
 

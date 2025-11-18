@@ -13,6 +13,8 @@ class Profile(models.Model):
     # если пользователь — поставщик, он может быть связан с одним или несколькими Shop
     shops = models.ManyToManyField('Shop', blank=True, related_name='owners')
 
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+
     def __str__(self):
         return f"{self.user.username} profile"
 class Shop(models.Model):
@@ -66,6 +68,8 @@ class ProductInfo(models.Model):
     quantity = models.PositiveIntegerField(default=0)  # Остаток товара в магазине
     price = models.FloatField()                   # Цена продажи
     price_rrc = models.FloatField()               # РРЦ — рекомендованная розничная цена
+
+    image = models.ImageField(upload_to='products/', blank=True, null=True)
 
     class Meta:
         unique_together = ('product', 'shop')     # Уникальность: товар может быть один раз у магазина

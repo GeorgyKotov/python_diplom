@@ -1,5 +1,8 @@
 from celery import shared_task
 from django.core.mail import send_mail
+from easy_thumbnails.files import generate_all_aliases
+from django.core.files.storage import default_storage
+from django.apps import apps
 
 
 @shared_task
@@ -30,3 +33,25 @@ def send_order_confirmation_email(order_id, user_email):
         recipient_list=[user_email],
         fail_silently=True,
     )
+
+
+@shared_task
+def generate_profile_avatar_thumbnails(profile_id):
+    Profile = apps.get_model('diplom', 'Profile')
+    profile = Profile.objects.get(id=profile_id)
+
+    if not profile.avatar:
+        return
+
+    generate_all_aliases(profile.avatar, include_global=True)
+
+
+@shared_task
+def generate_product_image_thumbnails(productinfo_id):
+    ProductInfo = apps.get_model('diplom', 'ProductInfo')
+    product = ProductInfo.objects.get(id=productinfo_id)
+
+    if not product.image:
+        return
+
+    generate_all_aliases(product.image, include_global=True)
