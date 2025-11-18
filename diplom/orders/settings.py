@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'easy_thumbnails',
+    'cachalot',
     'drf_spectacular',
     'social_django',
 ]
@@ -252,6 +253,18 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
     send_default_pii=True,
 )
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "TIMEOUT": None, 
+    }
+}
+
+CACHALOT_ENABLED = True
+CACHALOT_CACHE = 'default'
+CACHALOT_TIMEOUT = None
 
 
 
