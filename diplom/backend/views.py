@@ -545,3 +545,10 @@ class OrdersListAPIView(APIView):
 @login_required
 def home(request):
     return HttpResponse(f"Авторизация успешна, {request.user.username}")
+
+@method_decorator(csrf_exempt, name='dispatch')
+class TriggerErrorAPIView(APIView):
+    def get(self, request):
+        # Создаём намеренную ошибку
+        division_by_zero = 1 / 0
+        return Response({"detail": "This will never be executed"})

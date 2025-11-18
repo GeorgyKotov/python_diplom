@@ -1,4 +1,6 @@
 from pathlib import Path
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -242,6 +244,14 @@ THUMBNAIL_ALIASES = {
 }
 
 THUMBNAIL_DEFAULT_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
+
+sentry_sdk.init(
+    dsn="https://5789954a5b6b4a3e151e99348a08231e@o4510387547275264.ingest.de.sentry.io/4510387552518224",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    send_default_pii=True,
+)
 
 
 

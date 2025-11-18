@@ -12,6 +12,7 @@ from backend.views import (
     OrderCreateAPIView,
     OrdersListAPIView,
     home,
+    TriggerErrorAPIView
 )
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
@@ -62,4 +63,6 @@ urlpatterns = [
     # Авторизация через социальные сети
     path('auth/', include('social_django.urls', namespace='social')),
     path('', home, name='home'),
+
+    path("debug/sentry/", TriggerErrorAPIView.as_view()),
 ]
