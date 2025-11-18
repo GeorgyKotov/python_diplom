@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Profile, ProductInfo
-from .tasks_image import (
+from .tasks import (
     generate_profile_avatar_thumbnails,
     generate_product_image_thumbnails
 )

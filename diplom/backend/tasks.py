@@ -1,7 +1,6 @@
 from celery import shared_task
 from django.core.mail import send_mail
 from easy_thumbnails.files import generate_all_aliases
-from django.core.files.storage import default_storage
 from django.apps import apps
 
 
