@@ -136,14 +136,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.UserRateThrottle',
-        'rest_framework.throttling.AnonRateThrottle',
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
     ],
-    'DEFAULT_THROTTLE_RATES': {
-        'user': '100/hour',
-        'anon': '10/hour',
+    "DEFAULT_THROTTLE_RATES": {
+        "user": "100/minute",
     },
+    "DEFAULT_THROTTLE_CACHE": "throttle",
 }
 
 
