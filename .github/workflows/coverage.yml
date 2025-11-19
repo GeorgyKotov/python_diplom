@@ -14,7 +14,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     env:
-      DJANGO_SETTINGS_MODULE: orders.settings
+      DJANGO_SETTINGS_MODULE: orders.settings_test
       PYTHONPATH: diplom 
 
     steps:
